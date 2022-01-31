@@ -1,12 +1,12 @@
 package hashMap;
 
-public class NodeHashMap {
+public class NodeHashMap <K, V> {
     private int hash;
-    private int key;
-    private Object valueNode;
-    private NodeHashMap nextNode = null;
+    private K key;
+    private V valueNode;
+    private NodeHashMap<K, V> nextNode = null;
 
-    public NodeHashMap(int hash, int key, Object valueNode) {
+    public NodeHashMap(int hash, K key, V valueNode) {
         this.hash= hash;
         this.key = key;
         this.valueNode = valueNode;
@@ -20,11 +20,11 @@ public class NodeHashMap {
         this.hash = hash;
     }
 
-    public int getKey() {
+    public K getKey() {
         return key;
     }
 
-    public void setKey(int key) {
+    public void setKey(K key) {
         this.key = key;
     }
 
@@ -32,15 +32,15 @@ public class NodeHashMap {
         return valueNode;
     }
 
-    public void setValueNode(Object valueNode) {
+    public void setValueNode(V valueNode) {
         this.valueNode = valueNode;
     }
 
-    public NodeHashMap getNextNode() {
+    public NodeHashMap<K, V> getNextNode() {
         return nextNode;
     }
 
-    public void setNextNode(NodeHashMap nextNode) {
+    public void setNextNode(NodeHashMap<K, V> nextNode) {
         this.nextNode = nextNode;
     }
 }

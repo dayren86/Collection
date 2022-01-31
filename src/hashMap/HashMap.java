@@ -1,13 +1,13 @@
 package hashMap;
 
-public class HashMap {
+public class HashMap<K, V> {
     private final NodeHashMap[] hashArray = new NodeHashMap[16];
 
-    private int findIndexArray(Object key) {
+    private int findIndexArray(K key) {
         return key.hashCode() & 16 - 1;
     }
 
-    private NodeHashMap searchPrev(NodeHashMap findNode, int key) {
+    private NodeHashMap searchPrev(NodeHashMap findNode, K key) {
         while (findNode.getNextNode() != null) {
             if (findNode.getNextNode().getKey() == key) {
                 return findNode;
@@ -17,7 +17,7 @@ public class HashMap {
         return null;
     }
 
-    private boolean searchCollision (int key, int indexArray) {
+    private boolean searchCollision (K key, int indexArray) {
         NodeHashMap nodeHashMap = hashArray[indexArray];
         while (nodeHashMap.getNextNode() != null) {
             if (nodeHashMap.getNextNode().getKey() == key){
@@ -28,9 +28,9 @@ public class HashMap {
         return true;
     }
 
-    public void put(int key, Object value) {
+    public void put(K key, V value) {
         int findIndexArray = findIndexArray(key);
-        NodeHashMap nodeHashMap = new NodeHashMap(findIndexArray, key, value);
+        NodeHashMap<K, V> nodeHashMap = new NodeHashMap<>(findIndexArray, key, value);
         if (hashArray[findIndexArray] == null) {
             hashArray[findIndexArray] = nodeHashMap;
         } else {
@@ -38,14 +38,13 @@ public class HashMap {
                 NodeHashMap findNode = hashArray[findIndexArray];
                 while (findNode.getNextNode() != null) {
                     findNode = findNode.getNextNode();
-
                 }
                 findNode.setNextNode(nodeHashMap);
             }
         }
     }
 
-    public void remove(int key) {
+    public void remove(K key) {
         int findIndexArray = findIndexArray(key);
         if (hashArray[findIndexArray] == null) {
             System.out.println("Empty");
@@ -56,7 +55,7 @@ public class HashMap {
         if (findNode.getKey() == key) {
             hashArray[findIndexArray] = findNode.getNextNode();
         } else {
-            NodeHashMap prev = searchPrev(findNode, key);
+            NodeHashMap<K, V> prev = searchPrev(findNode, key);
             NodeHashMap del = prev.getNextNode();
             prev.setNextNode(del.getNextNode());
         }
@@ -74,20 +73,20 @@ public class HashMap {
         return size;
     }
 
-    public Object get(int key) {
+    public V get(K key) {
         int findIndexArray = findIndexArray(key);
-        NodeHashMap findNode = hashArray[findIndexArray];
+        NodeHashMap<K, V> findNode = hashArray[findIndexArray];
         while (findNode != null) {
             if (findNode.getKey() == key) {
-                return findNode.getValueNode();
+                return (V) findNode.getValueNode();
             }
             findNode = findNode.getNextNode();
         }
-        return -1;
+        return null;
     }
 
     public static void main(String[] args) {
-        HashMap hashMap = new HashMap();
+        HashMap<Integer, Integer> hashMap = new HashMap<>();
         hashMap.put(6, 6);
         hashMap.put(70, 79);
         hashMap.put(70, 80);

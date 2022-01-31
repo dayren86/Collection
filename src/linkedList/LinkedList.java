@@ -58,7 +58,7 @@ public class LinkedList <E> {
         return size;
     }
 
-    public Object get(Object value) {
+    public E get(E value) {
         if (headNode == null) {
             return null;
         }
@@ -69,7 +69,7 @@ public class LinkedList <E> {
             }
             findNode = findNode.getNextNode();
         }
-        return -1;
+        return null;
     }
 
     public static void main(String[] args) {

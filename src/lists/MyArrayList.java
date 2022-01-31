@@ -2,17 +2,14 @@ package lists;
 
 import java.util.Arrays;
 
-public abstract class List {
+public class MyArrayList<V> implements MyList<V> {
     private Object[] data = new Object[8];
     private int index = 0;
 
-    public Object getData(int index) {
-        return data[index];
-    }
-
-    public void addLast(Object value) {
+    @Override
+    public void addLast(V value) {
         if (index == data.length - 1) {
-            Object[] newData = new Object[data.length * 2];
+            Object[] newData =  new Object[data.length * 2];
             System.arraycopy(data, 0, newData, 0, data.length);
             data = newData;
         }
@@ -21,6 +18,7 @@ public abstract class List {
         System.out.println(Arrays.toString(data));
     }
 
+    @Override
     public void remove(int indexRemove) {
         data[indexRemove] = null;
         Object[] newData = new Object[data.length];
@@ -37,16 +35,36 @@ public abstract class List {
         System.out.println("arrayList.remove = " + Arrays.toString(data));
     }
 
+    @Override
     public void clear() {
-        Object[] data = {};
+        data = new Object[8];
         System.out.println("arrayList.clear = " + Arrays.toString(data));
     }
 
+    @Override
     public int size() {
-        return data.length;
+        int size = 0;
+        for (int i = 0; i < data.length; i++) {
+            if (data[i] != null) {
+                size++;
+            }
+        }
+        return size;
     }
 
-    public Object get(int index) {
-        return data[index];
+    @Override
+    public V get(int index) {
+        return (V) data[index];
     }
+
+    public static void main(String[] args) {
+        MyArrayList<String> arrayList = new MyArrayList<>();
+        for (int i = 1; i < 5; i++) {
+            arrayList.addLast("i" + i);
+        }
+        arrayList.remove(3);
+        System.out.println("arrayList.get(4) = " + arrayList.get(4));
+        System.out.println("arrayList.size() = " + arrayList.size());
+    }
+
 }
