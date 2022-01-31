@@ -1,7 +1,5 @@
 package lists;
 
-import java.util.Arrays;
-
 public class MyStackList<V> implements MyList<V> {
     private Object[] data = new Object[8];
     private int index = 0;
@@ -15,7 +13,6 @@ public class MyStackList<V> implements MyList<V> {
         }
         data[index] = value;
         index++;
-        System.out.println(Arrays.toString(data));
     }
 
     @Override
@@ -31,14 +28,11 @@ public class MyStackList<V> implements MyList<V> {
         }
         data = newData;
         index--;
-
-        System.out.println("arrayList.remove = " + Arrays.toString(data));
     }
 
     @Override
     public void clear() {
         data = new Object[8];
-        System.out.println("arrayList.clear = " + Arrays.toString(data));
     }
 
     @Override

@@ -17,10 +17,11 @@ public class HashMap<K, V> {
         return null;
     }
 
-    private boolean searchCollision (K key, int indexArray) {
+    private boolean searchCollision (K key, int indexArray, V value) {
         NodeHashMap nodeHashMap = hashArray[indexArray];
         while (nodeHashMap.getNextNode() != null) {
             if (nodeHashMap.getNextNode().getKey() == key){
+                nodeHashMap.getNextNode().setValueNode(value);
                 return false;
             }
             nodeHashMap = nodeHashMap.getNextNode();
@@ -34,7 +35,7 @@ public class HashMap<K, V> {
         if (hashArray[findIndexArray] == null) {
             hashArray[findIndexArray] = nodeHashMap;
         } else {
-            if (searchCollision(key, findIndexArray)) {
+            if (searchCollision(key, findIndexArray, value)) {
                 NodeHashMap findNode = hashArray[findIndexArray];
                 while (findNode.getNextNode() != null) {
                     findNode = findNode.getNextNode();
@@ -93,7 +94,7 @@ public class HashMap<K, V> {
         hashMap.put(70, 81);
         hashMap.put(1, 81);
         System.out.println("hashMap.size() = " + hashMap.size());
-        System.out.println("hashMap.get(70) = " + hashMap.get(6));
+        System.out.println("hashMap.get(70) = " + hashMap.get(70));
         hashMap.remove(6);
         System.out.println("hashMap.size() = " + hashMap.size());
     }

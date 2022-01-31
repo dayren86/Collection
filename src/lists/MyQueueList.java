@@ -1,13 +1,11 @@
 package lists;
 
-import java.util.Arrays;
-
 public class MyQueueList<V> implements MyList<V> {
     private Object[] data = new Object[8];
     private int index = 0;
 
     @Override
-    public void addLast(Object value) {
+    public void addLast(V value) {
         if (index == data.length - 1) {
             Object[] newData = new Object[data.length * 2];
             System.arraycopy(data, 0, newData, 0, data.length);
@@ -15,7 +13,6 @@ public class MyQueueList<V> implements MyList<V> {
         }
         data[index] = value;
         index++;
-        System.out.println(Arrays.toString(data));
     }
 
     @Override
@@ -31,14 +28,11 @@ public class MyQueueList<V> implements MyList<V> {
         }
         data = newData;
         index--;
-
-        System.out.println("arrayList.remove = " + Arrays.toString(data));
     }
 
     @Override
     public void clear() {
         data = new Object[8];
-        System.out.println("arrayList.clear = " + Arrays.toString(data));
     }
 
     @Override
@@ -73,13 +67,8 @@ public class MyQueueList<V> implements MyList<V> {
             queueList.addLast(i + "f");
         }
         queueList.addLast("eee");
-
-        int size = queueList.size();
-        System.out.println("queueList.size = " + size);
-
-
+       // queueList.addLast(2);
         queueList.remove(1);
-
         System.out.println("queueList.peek() = " + queueList.peek());
         queueList.poll();
         System.out.println("queueList.get(0) = " + queueList.get(0));

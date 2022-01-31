@@ -58,18 +58,20 @@ public class LinkedList <E> {
         return size;
     }
 
-    public E get(E value) {
+    public E get(int index) {
         if (headNode == null) {
-            return null;
+            System.out.println("LinkedList Empty");
+        }
+        if (index <= -1) {
+            index = 0;
         }
         NodeLinkedList<E> findNode = headNode;
-        while (findNode != null) {
-            if (findNode.getValueNode() == value) {
-                return findNode.getValueNode();
-            }
+        int startindex = 0;
+        while (startindex != index) {
             findNode = findNode.getNextNode();
+            startindex++;
         }
-        return null;
+        return findNode.getValueNode();
     }
 
     public static void main(String[] args) {
@@ -84,9 +86,9 @@ public class LinkedList <E> {
         linkedList.add(11);
 
         System.out.println("linkedList.size() = " + linkedList.size());
-        linkedList.remove(6);
+        linkedList.remove(5);
         System.out.println("linkedList.size() = " + linkedList.size());
-        System.out.println("linkedList.get = " + linkedList.get(5));
+        System.out.println("linkedList.get(-1) = " + linkedList.get(-1));
     }
 }
 
