@@ -1,8 +1,10 @@
 package linkedList;
 
-public class LinkedList <E> {
+public class LinkedList<E> {
 
     private NodeLinkedList<E> headNode;
+    private Object ArrayIndexOutOfBoundsException;
+    private Object IndexOutOfBoundsException;
 
     public void add(E item) {
         if (headNode == null) {
@@ -36,7 +38,7 @@ public class LinkedList <E> {
 
     public NodeLinkedList<E> searchPrevNode(NodeLinkedList<E> findNode, E valueNode) {
         while (findNode.getNextNode() != null) {
-            if (findNode.getNextNode().getValueNode() == valueNode){
+            if (findNode.getNextNode().getValueNode() == valueNode) {
                 return findNode;
             }
             findNode = findNode.getNextNode();
@@ -47,6 +49,7 @@ public class LinkedList <E> {
     public void clear() {
         headNode = null;
     }
+
     public int size() {
         int size = 1;
         NodeLinkedList<E> firstNode = headNode;
@@ -58,37 +61,34 @@ public class LinkedList <E> {
         return size;
     }
 
-    public E get(int index) {
+    public E get(int index) throws Throwable {
         if (headNode == null) {
             System.out.println("LinkedList Empty");
         }
-        if (index <= -1) {
-            index = 0;
+
+        if (index < 0 || index > size() - 1) {
+            throw new ArrayIndexOutOfBoundsException();
         }
+
+        int startIndex = 0;
         NodeLinkedList<E> findNode = headNode;
-        int startindex = 0;
-        while (startindex != index) {
+        while (startIndex != index) {
             findNode = findNode.getNextNode();
-            startindex++;
+            startIndex++;
         }
         return findNode.getValueNode();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Throwable {
 
-        LinkedList<Integer> linkedList= new LinkedList<>();
+        LinkedList<Integer> linkedList = new LinkedList<>();
         linkedList.add(5);
         linkedList.add(6);
         linkedList.add(7);
         linkedList.add(8);
         linkedList.add(9);
-        linkedList.add(10);
-        linkedList.add(11);
-
-        System.out.println("linkedList.size() = " + linkedList.size());
-        linkedList.remove(5);
-        System.out.println("linkedList.size() = " + linkedList.size());
         System.out.println("linkedList.get(-1) = " + linkedList.get(-1));
+        System.out.println("linkedList.get(-1) = " + linkedList.get(5));
     }
 }
 

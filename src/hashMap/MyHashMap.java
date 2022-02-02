@@ -1,6 +1,6 @@
 package hashMap;
 
-public class HashMap<K, V> {
+public class MyHashMap<K, V> {
     private final NodeHashMap[] hashArray = new NodeHashMap[16];
 
     private int findIndexArray(K key) {
@@ -19,13 +19,20 @@ public class HashMap<K, V> {
 
     private boolean searchCollision (K key, int indexArray, V value) {
         NodeHashMap nodeHashMap = hashArray[indexArray];
+
+
+        if (nodeHashMap.getKey() == key) {
+            nodeHashMap.setValueNode(value);
+            return false;
+        }
         while (nodeHashMap.getNextNode() != null) {
-            if (nodeHashMap.getNextNode().getKey() == key){
+            if (nodeHashMap.getNextNode().getKey() == key) {
                 nodeHashMap.getNextNode().setValueNode(value);
                 return false;
             }
             nodeHashMap = nodeHashMap.getNextNode();
         }
+
         return true;
     }
 
@@ -76,6 +83,7 @@ public class HashMap<K, V> {
 
     public V get(K key) {
         int findIndexArray = findIndexArray(key);
+
         NodeHashMap<K, V> findNode = hashArray[findIndexArray];
         while (findNode != null) {
             if (findNode.getKey() == key) {
@@ -83,20 +91,26 @@ public class HashMap<K, V> {
             }
             findNode = findNode.getNextNode();
         }
+
+
         return null;
     }
 
     public static void main(String[] args) {
-        HashMap<Integer, Integer> hashMap = new HashMap<>();
+        MyHashMap<Integer, Integer> hashMap = new MyHashMap<>();
         hashMap.put(6, 6);
-        hashMap.put(70, 79);
-        hashMap.put(70, 80);
-        hashMap.put(70, 81);
-        hashMap.put(1, 81);
-        System.out.println("hashMap.size() = " + hashMap.size());
+        hashMap.put(70, 71);
+        hashMap.put(70, 72);
+        hashMap.put(70, 73);
+        hashMap.put(6, 7);
+        //hashMap.put(86, 86);
+
+        System.out.println("hashMap.get(0) = " + hashMap.get(0));
+        System.out.println("hashMap.get(6) = " + hashMap.get(6));
+        System.out.println("hashMap.get(86) = " + hashMap.get(86));
         System.out.println("hashMap.get(70) = " + hashMap.get(70));
-        hashMap.remove(6);
         System.out.println("hashMap.size() = " + hashMap.size());
+
     }
 
 }
